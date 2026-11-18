@@ -2,7 +2,7 @@ use std::{any::Any, collections::BTreeMap};
 
 use serde::{de::DeserializeOwned, Serialize};
 use serde_json::Value;
-use skyline_smash::lua2cpp::L2CAgentBase;
+use smash::lua2cpp::L2CAgentBase;
 use thiserror::Error;
 
 #[repr(C)]

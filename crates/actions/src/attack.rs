@@ -7,7 +7,7 @@ use std::num::NonZeroU32;
 use bevy_reflect::prelude::*;
 
 use hash40::{hash40, Hash40};
-use skyline_smash::{app::lua_bind::AttackModule, phx::Hash40 as GameHash40};
+use smash::{app::lua_bind::AttackModule, phx::Hash40 as GameHash40};
 
 use crate::{decl_action, SerdeHash40};
 
@@ -561,12 +561,12 @@ impl Action for Attack {
     const NAME: &'static str = "Attack.set";
 
     #[cfg(feature = "bevy_reflect")]
-    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
+    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
         unimplemented!()
     }
 
     #[cfg(not(feature = "bevy_reflect"))]
-    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
+    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
         let (kbg, fkb, bkb) = match &self.knockback {
             Knockback::Fixed(value) => (0, *value, 0),
             Knockback::Scaling { growth, base } => (*growth, 0, *base),
@@ -639,7 +639,7 @@ impl Action for Attack {
                 context.module_accessor,
                 self.id as i32,
                 GameHash40::new_raw(relative_to.0 .0),
-                &skyline_smash::phx::Vector2f {
+                &smash::phx::Vector2f {
                     x: offset.x,
                     y: offset.y,
                 },
@@ -659,12 +659,12 @@ impl Action for AttackClear {
     const NAME: &'static str = "Attack.clear";
 
     #[cfg(feature = "bevy_reflect")]
-    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
+    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
         unimplemented!()
     }
 
     #[cfg(not(feature = "bevy_reflect"))]
-    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
+    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
         AttackModule::clear(context.module_accessor, self.0, false);
     }
 }
@@ -677,12 +677,12 @@ impl Action for AttackClearAll {
     const NAME: &'static str = "Attack.clear_all";
 
     #[cfg(feature = "bevy_reflect")]
-    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
+    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
         unimplemented!()
     }
 
     #[cfg(not(feature = "bevy_reflect"))]
-    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
+    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
         AttackModule::clear_all(context.module_accessor);
     }
 }
