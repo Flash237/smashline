@@ -33,8 +33,7 @@ crate-type = ["cdylib"]
 [dependencies]
 acmd-engine = { path = "crates/acmd-engine" }
 skyline.workspace = true
-smashline = { path = "crates/smashline", features = ["smash-rs"] }
-smash = { git = "https://github.com/WuBoytH/smash-rs" }
+smashline = { path = "crates/smashline" }
 locks.path = "crates/locks"
 paste = "1"
 vtables.path = "crates/vtables"

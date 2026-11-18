@@ -44,7 +44,7 @@ macro_rules! impl_action {
         impl Action for $id {
             const NAME: &'static str = $name;
 
-            unsafe fn execute(&self, fighter: &mut smash::lua2cpp::L2CAgentBase) {
+            unsafe fn execute(&self, fighter: &mut skyline_smash::lua2cpp::L2CAgentBase) {
                 #[cfg(feature = "bevy_reflect")]
                 {
                     unimplemented!()
@@ -67,13 +67,13 @@ impl Action for WaitUntil {
     const NAME: &'static str = "WaitUntil";
 
     #[cfg(feature = "bevy_reflect")]
-    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
+    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
         unimplemented!()
     }
 
     #[cfg(not(feature = "bevy_reflect"))]
-    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
-        smash::app::sv_animcmd::frame(context.lua_state_agent, self.0);
+    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
+        skyline_smash::app::sv_animcmd::frame(context.lua_state_agent, self.0);
     }
 }
 
@@ -86,13 +86,13 @@ impl Action for WaitFor {
     const NAME: &'static str = "WaitFor";
 
     #[cfg(feature = "bevy_reflect")]
-    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
+    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
         unimplemented!()
     }
 
     #[cfg(not(feature = "bevy_reflect"))]
-    unsafe fn execute(&self, context: &mut smash::lua2cpp::L2CAgentBase) {
-        smash::app::sv_animcmd::wait(context.lua_state_agent, self.0);
+    unsafe fn execute(&self, context: &mut skyline_smash::lua2cpp::L2CAgentBase) {
+        skyline_smash::app::sv_animcmd::wait(context.lua_state_agent, self.0);
     }
 }
 

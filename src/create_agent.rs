@@ -7,18 +7,18 @@ use std::{
 
 use acmd_engine::SmashlineScript;
 use skyline::hooks::InlineCtx;
-use smash::{
-    app::{BattleObject, BattleObjectModuleAccessor},
-    lua2cpp::{
-        L2CFighterAnimcmdEffectCommon, L2CFighterAnimcmdExpressionCommon,
-        L2CFighterAnimcmdGameCommon, L2CFighterAnimcmdSoundCommon, L2CFighterCommon,
-        L2CWeaponCommon,
-    },
-    lua_State,
-};
 use smashline::{
     locks::RwLock, Acmd, AcmdFunction, AgentEntry, AsHash40, BattleObjectCategory, Costume, Hash40, L2CAgentBase,
     L2CFighterBase, L2CValue, Priority, StatusLine, Variadic,
+    skyline_smash::{
+        app::{BattleObject, BattleObjectModuleAccessor},
+        lua2cpp::{
+            L2CFighterAnimcmdEffectCommon, L2CFighterAnimcmdExpressionCommon,
+            L2CFighterAnimcmdGameCommon, L2CFighterAnimcmdSoundCommon, L2CFighterCommon,
+            L2CWeaponCommon,
+        },
+        lua_State,
+    },
 };
 use vtables::{CustomDataAccessError, VirtualClass};
 
@@ -783,8 +783,8 @@ fn install_status_scripts(
                 match status.function {
                     $(
                         $i(f) => {
-                            let id = smash::lib::L2CValue::new(status.id);
-                            let condition = smash::lib::L2CValue::new(StatusLine::$i as i32);
+                            let id = smashline::L2CValue::new(status.id);
+                            let condition = smashline::L2CValue::new(StatusLine::$i as i32);
                             agent.0.sv_set_status_func(&id, &condition, unsafe { std::mem::transmute(f) })
                         },
                     )*
@@ -850,8 +850,8 @@ extern "C" fn set_status_scripts(agent: &mut L2CFighterWrapper) {
             ($($i:ident),*) => {
                 $(
                     {
-                        let lua_id = smash::lib::L2CValue::new(id);
-                        let condition = smash::lib::L2CValue::new(StatusLine::$i as i32);
+                        let lua_id = smashline::L2CValue::new(id);
+                        let condition = smashline::L2CValue::new(StatusLine::$i as i32);
                         let function = agent.0.sv_get_status_func(&lua_id, &condition);
                         if let Some(ptr) = function.try_pointer() {
                             original_statuses.insert((StatusLine::$i, id), ptr.cast::<()>() as _);
@@ -937,7 +937,7 @@ extern "C" fn set_status_scripts(agent: &mut L2CFighterWrapper) {
         }
     }
 
-    agent.0.global_table.try_table_mut().unwrap()[0xC] = smash::lib::L2CValue::new(new_total);
+    agent.0.global_table.try_table_mut().unwrap()[0xC] = smashline::L2CValue::new(new_total);
 }
 
 #[repr(transparent)]

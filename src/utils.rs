@@ -1,7 +1,6 @@
 use std::sync::atomic::Ordering;
 
-use smash::app::BattleObject;
-use smashline::{Costume, Hash40};
+use smashline::{Costume, Hash40, skyline_smash::app::BattleObject};
 
 use crate::{
     cloning::fighters::CURRENT_PLAYER_ID,
@@ -136,7 +135,7 @@ const MODULE_REFCOUNT_OFFSET: usize = 0x134;
 /// The manager's `std::recursive_mutex`, which guards both the module tree and the command deque.
 const MANAGER_MUTEX_OFFSET: usize = 0x60;
 
-type ModuleTree = smash::cpp::Tree<Hash40, *mut skyline::nn::ro::Module>;
+type ModuleTree = smashline::skyline_smash::cpp::Tree<Hash40, *mut skyline::nn::ro::Module>;
 
 struct ManagerLock(*mut u8);
 

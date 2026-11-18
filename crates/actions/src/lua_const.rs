@@ -29,7 +29,7 @@ impl<'de> Deserialize<'de> for LuaConst {
         #[cfg(not(feature = "bevy_reflect"))]
         {
             if unsafe {
-                !smash::lib::lua_bind_get_value(lua_bind_hash::lua_bind_hash_str(&name), &mut value)
+                !skyline_smash::lib::lua_bind_get_value(lua_bind_hash::lua_bind_hash_str(&name), &mut value)
             } {
                 return Err(<D::Error as serde::de::Error>::custom(format!(
                     "failed to get lua bind value for {name}"

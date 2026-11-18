@@ -1,7 +1,6 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
-use smash::app::BattleObject;
-use smashline::Hash40;
+use smashline::{Hash40, skyline_smash::app::BattleObject};
 
 #[allow(dead_code)]
 pub mod fighters;

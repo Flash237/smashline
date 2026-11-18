@@ -1,7 +1,6 @@
 use locks::RwLock;
 use skyline::hooks::InlineCtx;
-use smash::lib::L2CValue;
-use smashline::{Costume, Hash40, L2CFighterBase, StatusLine, Variadic};
+use smashline::{Costume, Hash40, L2CFighterBase, L2CValue, StatusLine, Variadic};
 
 pub type Callback = extern "C" fn(&mut L2CFighterBase);
 pub type Callback1 = extern "C" fn(&mut L2CFighterBase, &mut L2CValue);

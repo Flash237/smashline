@@ -1,7 +1,6 @@
 use locks::RwLock;
 use skyline::hooks::InlineCtx;
-use smash::app::BattleObject;
-use smashline::{BattleObjectCategory, Costume, Hash40, L2CFighterBase, ObjectEvent};
+use smashline::{BattleObjectCategory, Costume, Hash40, L2CFighterBase, ObjectEvent, skyline_smash::app::BattleObject};
 
 pub type StateCallbackFunction = unsafe extern "C" fn(&mut L2CFighterBase);
 
